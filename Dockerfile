@@ -9,9 +9,14 @@ RUN apt-get -yqq install python3-pip python3-dev curl gnupg
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
 RUN apt-get install -yq nodejs
 
+
 # copy our application code
 ADD flask-app /opt/flask-app
 WORKDIR /opt/flask-app
+
+
+COPY entrypoint.sh .
+
 
 # fetch app specific deps
 RUN npm install
@@ -22,4 +27,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 5000
 
 # start app
-CMD [ "python3", "./app.py" ]
+# CMD [ "python3", "./app.py" ]
